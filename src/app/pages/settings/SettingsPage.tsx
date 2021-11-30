@@ -24,7 +24,6 @@ const SettingsSavedMessage = styled.span`
   font-weight: bold;
   margin-top: 40px;
 
-  /* Center on smaller screens */
   @media (max-width: ${screenSize.medium}) {
     justify-content: center;
   }
@@ -36,7 +35,6 @@ const Footer = styled.footer`
   flex: 1;
   max-height: 50px;
 
-  /* Button fills width on smaller screens */
   @media (max-width: ${screenSize.medium}) {
     & button {
       flex: 1;
@@ -53,19 +51,15 @@ const SettingsPage: React.FunctionComponent = () => {
     useState<boolean>(false);
 
   const saveSettings = () => {
-    // Dispatch an action to update the nationalities in the redux store
     dispatch(selectedNationalitiesUpdated(nationalities));
 
-    // Clear the contacts list and fetch new ones now that the nationalities have been updated
     dispatch(contactsListCleared());
     dispatch(fetchContacts());
 
-    // Show "Settings Saved" message
     setShowSettingsSavedMessage(true);
   };
 
   const onNationalitiesChanged = (updatedNationalities: Nationality[]) => {
-    // Update local state
     setNationalities([...updatedNationalities]);
     setShowSettingsSavedMessage(false);
   };

@@ -67,7 +67,6 @@ const ContactsList: React.FunctionComponent = () => {
 
   useEffect(() => {
     if (hasScrolledToBottom) {
-      // Pass a function so that useEffect doesn't require numContactsToDisplay as a dependency. When this function runs it passes the current state 'numContactsToDisplay' as the first argument.
       setNumContactsToDisplay(
         prevNumContactsToDisplay =>
           prevNumContactsToDisplay + MAX_FETCH_BATCH_SIZE,

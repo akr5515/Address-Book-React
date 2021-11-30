@@ -34,10 +34,8 @@ const SearchBar = ({
   const [inputText, setInputText] = useState(defaultValue);
 
   const onTextChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // Set the local state
     setInputText(e.target.value);
 
-    // Also let the parent know the search text has changed if used.
     onSearchTextChanged(e.target.value);
   };
 

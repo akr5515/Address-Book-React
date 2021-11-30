@@ -1,12 +1,3 @@
-/**
- * @component
- *
- * A burger menu button used to open and close the sidebar
- *
- * @param {boolean} isOpen Tells us if the sidebar is open.
- * @param {callback} onClick Fires when the menu button is clicked
- *
- */
 import { colours } from 'constants/colours';
 import { screenSize } from 'constants/screenSizes';
 import React from 'react';
@@ -17,11 +8,6 @@ interface Props {
   onClick: () => void;
 }
 
-/**
- * Styled Components
- *
- * See https://styled-components.com/
- */
 const StyledMenuButton = styled.button<Props>`
   @media (min-width: ${screenSize.medium}) {
     display: none;
@@ -39,12 +25,10 @@ const StyledMenuButton = styled.button<Props>`
   padding: 0;
   z-index: 10;
 
-  /* Should not remove focus outline as it degrades accessability */
   &:focus {
     outline: none;
   }
 
-  /* Animate the button to change it from a menu button to a close button when the sidebar is open */
   div {
     width: 2rem;
     height: 0.25rem;

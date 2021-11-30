@@ -1,12 +1,3 @@
-/**
- * @component
- *
- * A generic Page component used on each route. This applies some basic styling so that it can be easily re-used.
- *
- * @param {string} heading The heading title of the page
- * @param {ReactNode} children The children inside the page
- *
- */
 import { colours } from 'constants/colours';
 import React from 'react';
 import styled from 'styled-components/macro';
@@ -17,11 +8,6 @@ interface Props {
   noPadding?: boolean;
 }
 
-/**
- * Styled Components
- *
- * See https://styled-components.com/
- */
 const Container = styled.section<Props>`
   display: flex;
   flex: 1;

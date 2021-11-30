@@ -51,7 +51,6 @@ const StyledNavLink = styled(NavLink)`
   font-size: 1.3rem;
   font-weight: bold;
 
-  /* Decrease the font size when the screen width is less than 640px (i.e tablet size) */
   @media (min-width: ${screenSize.medium}) {
     font-size: 1rem;
   }
@@ -61,7 +60,6 @@ const StyledNavLink = styled(NavLink)`
     border-left: solid 5px ${colours.secondary};
   }
 
-  /* List Item Icon */
   svg {
     height: 1em;
     width: 1em;

@@ -32,10 +32,8 @@ const InfoContainer = styled.div`
   margin-left: 20px;
   flex-direction: column;
 
-  /* When dealing with FlexBox and text overflow, you must set min-width of the parent to 0 */
   min-width: 0;
 
-  /* Display ellipsis (...) at the end of long text */
   & span {
     white-space: nowrap;
     overflow: hidden;

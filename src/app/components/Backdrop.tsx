@@ -1,11 +1,3 @@
-/**
- * @component
- *
- * Displays a darkened backdrop which overlays over the entire app.
- *
- * @param {callback} onClick Event fires when the backdrop is clicked.
- *
- */
 import React from 'react';
 import styled from 'styled-components/macro';
 
@@ -13,11 +5,6 @@ interface Props {
   onClick: () => void;
 }
 
-/**
- * Styled Components
- *
- * See https://styled-components.com/
- */
 const Container = styled.div`
   position: fixed;
   width: 100%;
