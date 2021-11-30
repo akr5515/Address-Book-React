@@ -5,24 +5,49 @@
  * This component is the skeleton around the actual pages, and should only
  * contain code that should be seen on all pages. (e.g. navigation bar)
  */
+import React, { useState } from 'react';
 
-import * as React from 'react';
-import { Helmet } from 'react-helmet-async';
-import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import styled from 'styled-components';
-import { GlobalStyle } from '../styles/global-styles';
 
-import { HomePage } from './pages/HomePage/Loadable';
-import { NotFoundPage } from './pages/NotFoundPage/Loadable';
-import { useTranslation } from 'react-i18next';
-import ContactsPage from './pages/contacts/ContactsPage';
+import Routes from './components/Routes';
+import Header from './components/Header';
+import Sidebar from './components/Sidebar';
+import Backdrop from './components/Backdrop';
+
+const Layout = styled.div`
+  height: 100%;
+  display: grid;
+  grid-template-rows: 50px 1fr;
+  grid-template-columns: auto 2fr;
+  grid-template-areas:
+    'header header'
+    'sidebar content';
+`;
 
 function App(): JSX.Element {
+  const [isSidebarOpen, setSideBarOpen] = useState(false);
+
+  const toggleSidebar = (): void => {
+    setSideBarOpen(!isSidebarOpen);
+  };
+
+  const onSidebarClicked = () => {
+    if (isSidebarOpen) {
+      toggleSidebar();
+    }
+  };
+
+  const backdrop = isSidebarOpen ? <Backdrop onClick={toggleSidebar} /> : null;
   return (
-    <div>
-      <h1>WOrks</h1>
-      <ContactsPage />
-    </div>
+    <Layout>
+      <Header
+        isSidebarOpen={isSidebarOpen}
+        onMenuButtonClicked={toggleSidebar}
+      />
+      <Sidebar isSidebarOpen={isSidebarOpen} onLinkClicked={onSidebarClicked} />
+      {backdrop}
+      <Routes />
+    </Layout>
   );
 }
 

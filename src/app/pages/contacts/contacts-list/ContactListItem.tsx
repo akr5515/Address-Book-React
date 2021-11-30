@@ -2,6 +2,7 @@ import { colours } from 'constants/colours';
 import { Contact } from 'models/Contact';
 import React from 'react';
 import styled from 'styled-components';
+import Avatar from '../contact-details/components/Avatar';
 
 interface Props {
   contact: Contact;
@@ -32,17 +33,40 @@ const ContactsDetailsContainer = styled.div`
   display: flex;
   margin-left: 20px;
   flex-direction: column;
+
+  min-width: 0;
+
+  & span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 `;
 
-const ContactName = styled.span``;
+const ContactName = styled.span`
+  color: ${colours.navy};
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 12px;
+`;
 
-const ContactUsername = styled.span``;
+const ContactUsername = styled.span`
+  color: ${colours.navy};
+  font-weight: bold;
+  font-size: 0.8rem;
+  margin-bottom: 8px;
+`;
 
-const ContactEmail = styled.span``;
+const ContactEmail = styled.span`
+  color: ${colours.navy};
+  font-weight: bold;
+  font-size: 0.8rem;
+`;
 
 const ContactListItem = ({ contact, onClick }: Props) => {
   return (
     <Container onClick={onClick}>
+      <Avatar alt="Contact Avatar" src={contact.avatarUrl} size={'5rem'} />
       <ContactsDetailsContainer>
         <ContactName>
           {contact.name.first} {contact.name.last}

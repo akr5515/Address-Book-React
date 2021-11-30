@@ -8,9 +8,12 @@ import {
   contactsSelector,
   fetchContacts,
   searchedContactsSelector,
+  searchTextUpdated,
 } from 'slices/contactsSlice';
 import styled from 'styled-components';
 import ContactListItem from './ContactListItem';
+import { useHasScrolledToBottom } from 'hooks/useHasScrolledToBottom';
+import SearchBar from 'app/components/SearchBar';
 
 const Container = styled.div`
   display: flex;
@@ -29,6 +32,10 @@ const List = styled.ul`
   padding: 0;
   margin: 0;
   overflow-y: auto;
+
+  a {
+    text-decoration: none;
+  }
 `;
 
 const ListItem = styled.li`
@@ -46,7 +53,7 @@ const ContactsList: React.FunctionComponent = () => {
 
   const contactsListRef = useRef<HTMLUListElement>(null);
   const { current } = contactsListRef;
-
+  const hasScrolledToBottom = useHasScrolledToBottom(current);
   //handle fetching
   useEffect(() => {
     if (numContactsToDisplay >= MAX_TOTAL_CONTACTS) {
@@ -57,6 +64,17 @@ const ContactsList: React.FunctionComponent = () => {
       dispatch(fetchContacts());
     }
   }, [dispatch, contacts.length, numContactsToDisplay]);
+
+  useEffect(() => {
+    if (hasScrolledToBottom) {
+      // Pass a function so that useEffect doesn't require numContactsToDisplay as a dependency. When this function runs it passes the current state 'numContactsToDisplay' as the first argument.
+      setNumContactsToDisplay(
+        prevNumContactsToDisplay =>
+          prevNumContactsToDisplay + MAX_FETCH_BATCH_SIZE,
+      );
+    }
+  }, [hasScrolledToBottom]);
+
   const renderContacts = () => {
     if ((isLoading && contacts.length === 0) || hasErrors) {
       return null;
@@ -83,9 +101,20 @@ const ContactsList: React.FunctionComponent = () => {
       );
     });
   };
+
+  const onSearchTextChanged = (text: string) => {
+    dispatch(searchTextUpdated(text));
+  };
   return (
     <Container>
-      <List ref={contactsListRef}>{renderContacts}</List>
+      <SearchBar
+        value={searchText}
+        placeholder={'Search...'}
+        onSearchTextChanged={onSearchTextChanged}
+        ariaLabel={'Search for contacts'}
+        type="search"
+      />
+      <List ref={contactsListRef}>{renderContacts()}</List>
     </Container>
   );
 };
